@@ -1,0 +1,63 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import 'react-toastify/dist/ReactToastify.css';
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  body {
+    @apply bg-secondary-50 text-secondary-700;
+  }
+}
+
+/* Custom Toast Styling */
+.Toastify__toast-container {
+  @apply text-sm;
+  z-index: 9999;
+}
+
+.Toastify__toast {
+  @apply rounded-lg shadow-lg min-h-[60px] p-4;
+}
+
+.Toastify__toast--success {
+  @apply bg-white border-l-4 border-accent-500;
+}
+
+.Toastify__toast--error {
+  @apply bg-white border-l-4 border-error-500;
+}
+
+.Toastify__toast--info {
+  @apply bg-white border-l-4 border-primary-500;
+}
+
+.Toastify__progress-bar {
+  @apply bg-gradient-to-r from-primary-500 to-accent-500;
+}
+
+/* Custom scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  @apply bg-secondary-100 rounded-full;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-secondary-300 rounded-full hover:bg-secondary-400;
+}
+
+/* Dragging styles */
+.dragging {
+  @apply transform rotate-2 shadow-xl opacity-75;
+}
+
+.drag-over {
+  @apply bg-primary-50 border-primary-200;
+}
