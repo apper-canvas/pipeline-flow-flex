@@ -7,7 +7,7 @@ import Badge from "@/components/atoms/Badge";
 import { Card, CardContent } from "@/components/atoms/Card";
 import { cn } from "@/utils/cn";
 
-const PipelineBoard = ({ deals, contacts, onMoveCard, onEditDeal, onDeleteDeal }) => {
+const PipelineBoard = ({ deals, contacts, onMoveCard, onEditDeal, onDeleteDeal, onViewDetails }) => {
   const [draggedCard, setDraggedCard] = useState(null);
   const [dragOverColumn, setDragOverColumn] = useState(null);
 
@@ -139,12 +139,18 @@ const PipelineBoard = ({ deals, contacts, onMoveCard, onEditDeal, onDeleteDeal }
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.2 }}
                       >
-                        <Card
-draggable
+<Card
+                          draggable
                           onDragStart={(e) => handleDragStart(e, deal)}
                           onDragEnd={handleDragEnd}
+                          onClick={(e) => {
+                            // Prevent drag interference
+                            if (!draggedCard) {
+                              onViewDetails?.(deal);
+                            }
+                          }}
                           className={cn(
-                            "group cursor-move transition-all duration-200 hover:shadow-lg",
+                            "group cursor-pointer transition-all duration-200 hover:shadow-lg",
                             draggedCard?.Id === deal.Id && "opacity-50 rotate-2",
                             `border-l-4 ${stage.color.replace("border-", "border-l-")}`
                           )}

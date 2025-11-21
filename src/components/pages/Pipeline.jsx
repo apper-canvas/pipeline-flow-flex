@@ -10,13 +10,14 @@ import Modal from "@/components/atoms/Modal";
 import Button from "@/components/atoms/Button";
 import PipelineBoard from "@/components/organisms/PipelineBoard";
 import DealForm from "@/components/molecules/DealForm";
-
+import DealDetails from "@/components/organisms/DealDetails";
 const Pipeline = () => {
   const [deals, setDeals] = useState([]);
   const [contacts, setContacts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [showDealModal, setShowDealModal] = useState(false);
+const [showDealModal, setShowDealModal] = useState(false);
+  const [showDealDetailsModal, setShowDealDetailsModal] = useState(false);
   const [selectedDeal, setSelectedDeal] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -49,9 +50,14 @@ const Pipeline = () => {
     setShowDealModal(true);
   };
 
-  const handleEditDeal = (deal) => {
+const handleEditDeal = (deal) => {
     setSelectedDeal(deal);
     setShowDealModal(true);
+  };
+
+  const handleViewDealDetails = (deal) => {
+    setSelectedDeal(deal);
+    setShowDealDetailsModal(true);
   };
 
   const handleSubmitDeal = async (dealData) => {
@@ -169,12 +175,13 @@ const Pipeline = () => {
 
       {/* Pipeline Board */}
       <div className="min-h-[600px]">
-        <PipelineBoard
+<PipelineBoard
           deals={deals}
           contacts={contacts}
-onMoveCard={handleMoveCard}
+          onMoveCard={handleMoveCard}
           onEditDeal={handleEditDeal}
           onDeleteDeal={handleDeleteDeal}
+          onViewDetails={handleViewDealDetails}
         />
       </div>
 
@@ -191,6 +198,24 @@ onMoveCard={handleMoveCard}
           onCancel={() => setShowDealModal(false)}
           isSubmitting={isSubmitting}
         />
+      </Modal>
+{/* Deal Details Modal */}
+      <Modal
+        isOpen={showDealDetailsModal}
+        onClose={() => setShowDealDetailsModal(false)}
+        title="Deal Details"
+        size="xl"
+      >
+        {selectedDeal && (
+          <DealDetails
+            deal={selectedDeal}
+            onEdit={(deal) => {
+              setShowDealDetailsModal(false);
+              handleEditDeal(deal);
+            }}
+            onClose={() => setShowDealDetailsModal(false)}
+          />
+        )}
       </Modal>
     </div>
   );
