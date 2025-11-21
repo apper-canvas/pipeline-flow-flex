@@ -1,5 +1,6 @@
-import { getApperClient } from '@/services/apperClient';
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
+import React from "react";
+import { getApperClient } from "@/services/apperClient";
 
 export const activitiesService = {
   async getAll() {
@@ -48,8 +49,50 @@ export const activitiesService = {
       console.error("Error fetching activities:", error?.response?.data?.message || error);
       return [];
     }
-  },
+},
 
+  // Get activities by deal ID (through contact relationship)
+  async getByDealId(dealId) {
+    try {
+      const params = {
+        fields: [
+          {"field": {"Name": "Id"}},
+          {"field": {"Name": "Name"}},
+          {"field": {"Name": "description_c"}},
+          {"field": {"Name": "type_c"}},
+          {"field": {"Name": "contactId_c"}, "referenceField": {"field": {"Name": "Name"}}},
+          {"field": {"Name": "CreatedOn"}}
+        ],
+        where: [
+          {
+            "FieldName": "dealId_c",
+            "Operator": "EqualTo", 
+            "Values": [parseInt(dealId)]
+          }
+        ],
+        orderBy: [{"fieldName": "CreatedOn", "sorttype": "DESC"}]
+      };
+
+const apperClient = getApperClient();
+      
+      const response = await apperClient.fetchRecords('activities_c', params);
+      
+      if (!response?.data?.length) {
+        return [];
+      }
+      
+      return response.data.map(activity => ({
+        ...activity,
+        description: activity.description_c || activity.Name || '',
+        type: activity.type_c || 'call',
+        contactId: activity.contactId_c?.Id || activity.contactId_c || null,
+        timestamp: activity.CreatedOn
+      }));
+    } catch (error) {
+      console.error("Error fetching activities by deal ID:", error?.response?.data?.message || error);
+      return [];
+}
+  },
   async getByContactId(contactId) {
     try {
       const apperClient = getApperClient();

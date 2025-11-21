@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { formatDistanceToNow, format } from 'date-fns';
-import ApperIcon from '@/components/ApperIcon';
-import Button from '@/components/atoms/Button';
-import Badge from '@/components/atoms/Badge';
-import Modal from '@/components/atoms/Modal';
-import ActivityForm from '@/components/molecules/ActivityForm';
-import { contactsService } from '@/services/api/contactsService';
-import { activitiesService } from '@/services/api/activitiesService';
-import Loading from '@/components/ui/Loading';
-import { toast } from 'react-toastify';
+import React, { useEffect, useState } from "react";
+import { format, formatDistanceToNow } from "date-fns";
+import { contactsService } from "@/services/api/contactsService";
+import { activitiesService } from "@/services/api/activitiesService";
+import { toast } from "react-toastify";
+import ApperIcon from "@/components/ApperIcon";
+import Loading from "@/components/ui/Loading";
+import Modal from "@/components/atoms/Modal";
+import Button from "@/components/atoms/Button";
+import Badge from "@/components/atoms/Badge";
+import ActivityForm from "@/components/molecules/ActivityForm";
 
 const DealDetails = ({ deal, onEdit, onClose }) => {
   const [contact, setContact] = useState(null);
@@ -279,11 +279,11 @@ const DealDetails = ({ deal, onEdit, onClose }) => {
                       className="text-primary-600" 
                     />
                   </div>
-                  <div className="flex-1 min-w-0">
+<div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between">
-                      <h4 className="font-medium text-secondary-900">{activity.subject}</h4>
+                      <h4 className="font-medium text-secondary-900">{activity.description || activity.Name}</h4>
                       <span className="text-xs text-secondary-500">
-                        {formatDistanceToNow(new Date(activity.createdAt || activity.date), { 
+                        {formatDistanceToNow(new Date(activity.timestamp || activity.CreatedOn), {
                           addSuffix: true 
                         })}
                       </span>
