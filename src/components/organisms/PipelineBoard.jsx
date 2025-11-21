@@ -140,11 +140,11 @@ const PipelineBoard = ({ deals, contacts, onMoveCard, onEditDeal, onDeleteDeal }
                         transition={{ duration: 0.2 }}
                       >
                         <Card
-                          draggable
+draggable
                           onDragStart={(e) => handleDragStart(e, deal)}
                           onDragEnd={handleDragEnd}
                           className={cn(
-                            "cursor-move transition-all duration-200 hover:shadow-lg",
+                            "group cursor-move transition-all duration-200 hover:shadow-lg",
                             draggedCard?.Id === deal.Id && "opacity-50 rotate-2",
                             `border-l-4 ${stage.color.replace("border-", "border-l-")}`
                           )}
@@ -157,20 +157,20 @@ const PipelineBoard = ({ deals, contacts, onMoveCard, onEditDeal, onDeleteDeal }
                                   {deal.title}
                                 </h4>
 <div className="flex gap-1">
-                                  <Button
+<Button
                                     variant="ghost"
                                     size="sm"
                                     onClick={() => onEditDeal(deal)}
-                                    className="opacity-0 group-hover:opacity-100 p-1 h-auto"
+                                    className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-1 h-auto hover:bg-secondary-100"
                                     title="Edit deal"
                                   >
                                     <ApperIcon name="Edit2" size={12} />
                                   </Button>
-                                  <Button
+<Button
                                     variant="ghost"
                                     size="sm"
                                     onClick={() => onDeleteDeal(deal.Id)}
-                                    className="opacity-0 group-hover:opacity-100 p-1 h-auto text-error-500 hover:text-error-600"
+                                    className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-1 h-auto text-error-500 hover:text-error-600 hover:bg-error-50"
                                     title="Delete deal"
                                   >
                                     <ApperIcon name="Trash2" size={12} />
