@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import ApperIcon from "@/components/ApperIcon";
-import Button from "@/components/atoms/Button";
-
+import LogoutButton from "@/components/atoms/LogoutButton";
+import { cn } from "@/utils/cn";
 const Header = () => {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -48,7 +48,9 @@ const Header = () => {
           </nav>
 
           {/* Quick Actions */}
-          <div className="flex items-center space-x-3">
+<div className="flex items-center space-x-3">
+            {/* Logout Button */}
+            <LogoutButton />
             
             {/* Mobile Menu Button */}
             <button
@@ -81,8 +83,10 @@ const Header = () => {
                     <span>{item.label}</span>
                   </Link>
                 );
-              })}
+})}
               
+              {/* Mobile Logout Button */}
+              <LogoutButton mobile />
             </nav>
           </div>
         )}
