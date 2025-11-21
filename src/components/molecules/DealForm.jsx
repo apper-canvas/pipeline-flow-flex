@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Button from "@/components/atoms/Button";
 import Input from "@/components/atoms/Input";
+import Badge from "@/components/atoms/Badge";
 import { contactsService } from "@/services/api/contactsService";
 
 const DealForm = ({ deal, onSubmit, onCancel, isSubmitting }) => {
-  const [formData, setFormData] = useState({
+const [formData, setFormData] = useState({
+    Name: deal?.Name || "",
+    Tags: deal?.Tags || "",
     title: deal?.title || "",
     contactId: deal?.contactId || "",
     value: deal?.value || "",
@@ -74,16 +77,94 @@ const DealForm = ({ deal, onSubmit, onCancel, isSubmitting }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      onSubmit({
+onSubmit({
         ...formData,
         contactId: parseInt(formData.contactId),
-        value: parseFloat(formData.value)
+        value: parseFloat(formData.value),
+        Name: formData.Name.trim(),
+        Tags: formData.Tags.trim()
       });
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 p-6">
+<form onSubmit={handleSubmit} className="space-y-6 p-6">
+      {/* System Fields Display - Read Only */}
+      {deal && (
+        <div className="bg-secondary-50 rounded-lg p-4 space-y-3 border border-secondary-200">
+          <h3 className="text-sm font-semibold text-secondary-700 mb-3">Deal Information</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+            {deal.CreatedOn && (
+              <div>
+                <span className="text-secondary-500">Created On:</span>
+                <span className="ml-2 text-secondary-700">
+                  {new Date(deal.CreatedOn).toLocaleDateString()}
+                </span>
+              </div>
+            )}
+            {deal.CreatedBy?.Name && (
+              <div>
+                <span className="text-secondary-500">Created By:</span>
+                <span className="ml-2 text-secondary-700">{deal.CreatedBy.Name}</span>
+              </div>
+            )}
+            {deal.ModifiedOn && (
+              <div>
+                <span className="text-secondary-500">Modified On:</span>
+                <span className="ml-2 text-secondary-700">
+                  {new Date(deal.ModifiedOn).toLocaleDateString()}
+                </span>
+              </div>
+            )}
+            {deal.ModifiedBy?.Name && (
+              <div>
+                <span className="text-secondary-500">Modified By:</span>
+                <span className="ml-2 text-secondary-700">{deal.ModifiedBy.Name}</span>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      <div className="space-y-2">
+        <label className="text-sm font-medium text-secondary-700">
+          Deal Name *
+        </label>
+        <Input
+          name="Name"
+          value={formData.Name}
+          onChange={handleChange}
+          placeholder="Enter deal name"
+        />
+        {errors.Name && (
+          <p className="text-sm text-error-600">{errors.Name}</p>
+        )}
+      </div>
+
+      <div className="space-y-2">
+        <label className="text-sm font-medium text-secondary-700">
+          Tags
+        </label>
+        <Input
+          name="Tags"
+          value={formData.Tags}
+          onChange={handleChange}
+          placeholder="Enter tags separated by commas (e.g., urgent, high-value)"
+        />
+        {formData.Tags && (
+          <div className="flex flex-wrap gap-2 mt-2">
+            {formData.Tags.split(',').filter(tag => tag.trim()).map((tag, index) => (
+              <Badge key={index} variant="secondary">
+                {tag.trim()}
+              </Badge>
+            ))}
+          </div>
+        )}
+        {errors.Tags && (
+          <p className="text-sm text-error-600">{errors.Tags}</p>
+        )}
+      </div>
+      
       <div className="space-y-2">
         <label className="text-sm font-medium text-secondary-700">
           Deal Title *
