@@ -7,7 +7,7 @@ export const dealsService = {
       const apperClient = getApperClient();
       
       const params = {
-        fields: [
+fields: [
           {"field": {"Name": "Id"}},
           {"field": {"Name": "Name"}},
           {"field": {"Name": "title_c"}},
@@ -17,7 +17,9 @@ export const dealsService = {
           {"field": {"Name": "contactId_c"}, "referenceField": {"field": {"Name": "Name"}}},
           {"field": {"Name": "Tags"}},
           {"field": {"Name": "CreatedOn"}},
-          {"field": {"Name": "ModifiedOn"}}
+          {"field": {"Name": "CreatedBy"}, "referenceField": {"field": {"Name": "Name"}}},
+          {"field": {"Name": "ModifiedOn"}},
+          {"field": {"Name": "ModifiedBy"}, "referenceField": {"field": {"Name": "Name"}}}
         ]
       };
       
@@ -57,7 +59,7 @@ export const dealsService = {
       const tableName = 'deals_c';
       
       const params = {
-        fields: [
+fields: [
           {"field": {"Name": "Id"}},
           {"field": {"Name": "Name"}},
           {"field": {"Name": "title_c"}},
@@ -67,7 +69,9 @@ export const dealsService = {
           {"field": {"Name": "contactId_c"}, "referenceField": {"field": {"Name": "Name"}}},
           {"field": {"Name": "Tags"}},
           {"field": {"Name": "CreatedOn"}},
-          {"field": {"Name": "ModifiedOn"}}
+          {"field": {"Name": "CreatedBy"}, "referenceField": {"field": {"Name": "Name"}}},
+          {"field": {"Name": "ModifiedOn"}},
+          {"field": {"Name": "ModifiedBy"}, "referenceField": {"field": {"Name": "Name"}}}
         ]
       };
       
@@ -100,7 +104,7 @@ export const dealsService = {
       const apperClient = getApperClient();
       
       const params = {
-        fields: [
+fields: [
           {"field": {"Name": "Id"}},
           {"field": {"Name": "Name"}},
           {"field": {"Name": "title_c"}},
@@ -110,7 +114,9 @@ export const dealsService = {
           {"field": {"Name": "contactId_c"}},
           {"field": {"Name": "Tags"}},
           {"field": {"Name": "CreatedOn"}},
-          {"field": {"Name": "ModifiedOn"}}
+          {"field": {"Name": "CreatedBy"}, "referenceField": {"field": {"Name": "Name"}}},
+          {"field": {"Name": "ModifiedOn"}},
+          {"field": {"Name": "ModifiedBy"}, "referenceField": {"field": {"Name": "Name"}}}
         ],
         where: [{
           "FieldName": "contactId_c",
