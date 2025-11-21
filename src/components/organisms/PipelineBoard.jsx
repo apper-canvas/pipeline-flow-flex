@@ -7,7 +7,7 @@ import Badge from "@/components/atoms/Badge";
 import { Card, CardContent } from "@/components/atoms/Card";
 import { cn } from "@/utils/cn";
 
-const PipelineBoard = ({ deals, contacts, onMoveCard, onEditDeal }) => {
+const PipelineBoard = ({ deals, contacts, onMoveCard, onEditDeal, onDeleteDeal }) => {
   const [draggedCard, setDraggedCard] = useState(null);
   const [dragOverColumn, setDragOverColumn] = useState(null);
 
@@ -156,14 +156,26 @@ const PipelineBoard = ({ deals, contacts, onMoveCard, onEditDeal }) => {
                                 <h4 className="font-medium text-secondary-900 text-sm leading-tight">
                                   {deal.title}
                                 </h4>
-                                <Button
-                                  variant="ghost"
-                                  size="sm"
-                                  onClick={() => onEditDeal(deal)}
-                                  className="opacity-0 group-hover:opacity-100 p-1 h-auto"
-                                >
-                                  <ApperIcon name="Edit2" size={12} />
-                                </Button>
+<div className="flex gap-1">
+                                  <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    onClick={() => onEditDeal(deal)}
+                                    className="opacity-0 group-hover:opacity-100 p-1 h-auto"
+                                    title="Edit deal"
+                                  >
+                                    <ApperIcon name="Edit2" size={12} />
+                                  </Button>
+                                  <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    onClick={() => onDeleteDeal(deal.Id)}
+                                    className="opacity-0 group-hover:opacity-100 p-1 h-auto text-error-500 hover:text-error-600"
+                                    title="Delete deal"
+                                  >
+                                    <ApperIcon name="Trash2" size={12} />
+                                  </Button>
+                                </div>
                               </div>
 
                               {/* Contact Name */}

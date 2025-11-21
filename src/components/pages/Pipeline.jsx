@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
-import Button from "@/components/atoms/Button";
-import Modal from "@/components/atoms/Modal";
-import DealForm from "@/components/molecules/DealForm";
-import PipelineBoard from "@/components/organisms/PipelineBoard";
-import Loading from "@/components/ui/Loading";
-import Error from "@/components/ui/Error";
-import Empty from "@/components/ui/Empty";
-import ApperIcon from "@/components/ApperIcon";
+import React, { useEffect, useState } from "react";
 import { dealsService } from "@/services/api/dealsService";
 import { contactsService } from "@/services/api/contactsService";
 import { toast } from "react-toastify";
+import ApperIcon from "@/components/ApperIcon";
+import Loading from "@/components/ui/Loading";
+import Error from "@/components/ui/Error";
+import Empty from "@/components/ui/Empty";
+import Modal from "@/components/atoms/Modal";
+import Button from "@/components/atoms/Button";
+import PipelineBoard from "@/components/organisms/PipelineBoard";
+import DealForm from "@/components/molecules/DealForm";
 
 const Pipeline = () => {
   const [deals, setDeals] = useState([]);
@@ -92,9 +92,27 @@ const Pipeline = () => {
     } catch (error) {
       toast.error("Failed to move deal");
       console.error("Deal move failed:", error);
-    }
+}
   };
 
+  const handleDeleteDeal = async (dealId) => {
+    if (!window.confirm('Are you sure you want to delete this deal? This action cannot be undone.')) {
+      return;
+    }
+    
+    try {
+      const success = await dealsService.delete(dealId);
+      if (success) {
+        setDeals(prev => prev.filter(d => d.Id !== dealId));
+        toast.success('Deal deleted successfully');
+      } else {
+        toast.error('Failed to delete deal');
+      }
+    } catch (error) {
+      toast.error('Failed to delete deal');
+      console.error('Deal deletion failed:', error);
+    }
+  };
   if (loading) {
     return <Loading type="pipeline" />;
   }
@@ -154,8 +172,9 @@ const Pipeline = () => {
         <PipelineBoard
           deals={deals}
           contacts={contacts}
-          onMoveCard={handleMoveCard}
+onMoveCard={handleMoveCard}
           onEditDeal={handleEditDeal}
+          onDeleteDeal={handleDeleteDeal}
         />
       </div>
 
