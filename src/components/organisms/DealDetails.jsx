@@ -176,7 +176,7 @@ const DealDetails = ({ deal, onEdit, onClose }) => {
               </div>
             )}
             
-            <div className="grid grid-cols-2 gap-4">
+<div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="text-sm font-medium text-secondary-700">Created</label>
                 <p className="text-secondary-600 text-sm">
@@ -191,6 +191,41 @@ const DealDetails = ({ deal, onEdit, onClose }) => {
                   </p>
                 </div>
               )}
+            </div>
+            
+            {/* System Fields */}
+            <div className="pt-4 border-t border-secondary-200">
+              <h4 className="text-sm font-medium text-secondary-700 mb-3">Audit Information</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                {deal.CreatedOn && (
+                  <div>
+                    <span className="text-secondary-500">Created On:</span>
+                    <span className="ml-2 text-secondary-700">
+                      {new Date(deal.CreatedOn).toLocaleDateString()}
+                    </span>
+                  </div>
+                )}
+                {deal.CreatedBy?.Name && (
+                  <div>
+                    <span className="text-secondary-500">Created By:</span>
+                    <span className="ml-2 text-secondary-700">{deal.CreatedBy.Name}</span>
+                  </div>
+                )}
+                {deal.ModifiedOn && (
+                  <div>
+                    <span className="text-secondary-500">Modified On:</span>
+                    <span className="ml-2 text-secondary-700">
+                      {new Date(deal.ModifiedOn).toLocaleDateString()}
+                    </span>
+                  </div>
+                )}
+                {deal.ModifiedBy?.Name && (
+                  <div>
+                    <span className="text-secondary-500">Modified By:</span>
+                    <span className="ml-2 text-secondary-700">{deal.ModifiedBy.Name}</span>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
