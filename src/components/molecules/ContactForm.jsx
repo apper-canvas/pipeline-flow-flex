@@ -3,12 +3,13 @@ import Button from "@/components/atoms/Button";
 import Input from "@/components/atoms/Input";
 
 const ContactForm = ({ contact, onSubmit, onCancel, isSubmitting }) => {
-  const [formData, setFormData] = useState({
-    name: contact?.name || "",
-    email: contact?.email || "",
-    phone: contact?.phone || "",
-    company: contact?.company || "",
-    notes: contact?.notes || ""
+const [formData, setFormData] = useState({
+    name: contact?.Name || contact?.name || "",
+    email: contact?.email_c || contact?.email || "",
+    phone: contact?.phone_c || contact?.phone || "",
+    company: contact?.company_c || contact?.company || "",
+    notes: contact?.notes_c || contact?.notes || "",
+    tags: contact?.Tags || ""
   });
 
   const [errors, setErrors] = useState({});
@@ -23,7 +24,7 @@ const ContactForm = ({ contact, onSubmit, onCancel, isSubmitting }) => {
     }
   };
 
-  const validateForm = () => {
+const validateForm = () => {
     const newErrors = {};
     
     if (!formData.name.trim()) {
@@ -53,7 +54,7 @@ const ContactForm = ({ contact, onSubmit, onCancel, isSubmitting }) => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6 p-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
           <label className="text-sm font-medium text-secondary-700">
             Name *
@@ -85,6 +86,140 @@ const ContactForm = ({ contact, onSubmit, onCancel, isSubmitting }) => {
           )}
         </div>
       </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="space-y-2">
+          <label className="text-sm font-medium text-secondary-700">
+            Phone
+          </label>
+          <Input
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            placeholder="Enter phone number"
+          />
+        </div>
+        
+        <div className="space-y-2">
+          <label className="text-sm font-medium text-secondary-700">
+            Company *
+          </label>
+          <Input
+            name="company"
+            value={formData.company}
+            onChange={handleChange}
+            placeholder="Enter company name"
+          />
+          {errors.company && (
+            <p className="text-sm text-error-600">{errors.company}</p>
+          )}
+        </div>
+      </div>
+
+      <div className="space-y-2">
+        <label className="text-sm font-medium text-secondary-700">
+          Tags
+        </label>
+        <Input
+          name="tags"
+          value={formData.tags}
+          onChange={handleChange}
+          placeholder="Enter tags separated by commas (e.g., sales, priority, vip)"
+        />
+        <p className="text-xs text-secondary-500">
+          Separate multiple tags with commas
+        </p>
+      </div>
+
+      <div className="space-y-2">
+        <label className="text-sm font-medium text-secondary-700">
+          Notes
+        </label>
+        <textarea
+          name="notes"
+          value={formData.notes}
+          onChange={handleChange}
+          placeholder="Additional notes about this contact"
+          rows={3}
+          className="w-full px-3 py-2 border border-secondary-300 rounded-lg text-sm placeholder-secondary-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+        />
+      </div>
+
+      {/* System Information - Read-only fields shown when editing */}
+      {contact && (
+        <div className="space-y-4 pt-4 border-t border-secondary-200">
+          <h3 className="text-sm font-medium text-secondary-700">System Information</h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {contact.Owner && (
+              <div className="space-y-1">
+                <label className="text-xs font-medium text-secondary-600 uppercase tracking-wide">
+                  Owner
+                </label>
+                <p className="text-sm text-secondary-900">
+                  {contact.Owner?.Name || contact.Owner}
+                </p>
+              </div>
+            )}
+            
+            {contact.CreatedOn && (
+              <div className="space-y-1">
+                <label className="text-xs font-medium text-secondary-600 uppercase tracking-wide">
+                  Created On
+                </label>
+                <p className="text-sm text-secondary-900">
+                  {new Date(contact.CreatedOn).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                  })}
+                </p>
+              </div>
+            )}
+            
+            {contact.CreatedBy && (
+              <div className="space-y-1">
+                <label className="text-xs font-medium text-secondary-600 uppercase tracking-wide">
+                  Created By
+                </label>
+                <p className="text-sm text-secondary-900">
+                  {contact.CreatedBy?.Name || contact.CreatedBy}
+                </p>
+              </div>
+            )}
+            
+            {contact.ModifiedOn && (
+              <div className="space-y-1">
+                <label className="text-xs font-medium text-secondary-600 uppercase tracking-wide">
+                  Modified On
+                </label>
+                <p className="text-sm text-secondary-900">
+                  {new Date(contact.ModifiedOn).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                  })}
+                </p>
+              </div>
+            )}
+            
+            {contact.ModifiedBy && (
+              <div className="space-y-1">
+                <label className="text-xs font-medium text-secondary-600 uppercase tracking-wide">
+                  Modified By
+                </label>
+                <p className="text-sm text-secondary-900">
+                  {contact.ModifiedBy?.Name || contact.ModifiedBy}
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
@@ -127,7 +262,7 @@ const ContactForm = ({ contact, onSubmit, onCancel, isSubmitting }) => {
           placeholder="Add any relevant notes about this contact"
           className="flex w-full rounded-md border border-secondary-300 bg-white px-3 py-2 text-sm placeholder:text-secondary-400 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 resize-none"
         />
-      </div>
+</div>
       
       <div className="flex justify-end space-x-3 pt-4 border-t border-secondary-200">
         <Button
