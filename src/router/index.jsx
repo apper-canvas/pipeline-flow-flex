@@ -1,6 +1,6 @@
-import { createBrowserRouter } from 'react-router-dom';
-import { Suspense, lazy } from 'react';
-import { getRouteConfig } from './route.utils';
+import { createBrowserRouter } from "react-router-dom";
+import React, { Suspense, lazy } from "react";
+import { getRouteConfig } from "@/router/route.utils";
 
 // Lazy load all page components
 const Root = lazy(() => import('@/layouts/Root'));
@@ -63,11 +63,13 @@ const createRoute = ({
 const mainRoutes = [
   createRoute({
     index: true,
-    element: <Dashboard />
+    element: <Dashboard />,
+    title: 'Dashboard'
   }),
   createRoute({
-    path: "contacts",
-    element: <Contacts />
+    path: 'contacts',
+    element: <Contacts />,
+    title: 'Contacts'
   }),
   createRoute({
     path: "pipeline", 
