@@ -162,61 +162,6 @@ const validateForm = () => {
               </div>
             )}
             
-            {contact.CreatedOn && (
-              <div className="space-y-1">
-                <label className="text-xs font-medium text-secondary-600 uppercase tracking-wide">
-                  Created On
-                </label>
-                <p className="text-sm text-secondary-900">
-                  {new Date(contact.CreatedOn).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                  })}
-                </p>
-              </div>
-            )}
-            
-            {contact.CreatedBy && (
-              <div className="space-y-1">
-                <label className="text-xs font-medium text-secondary-600 uppercase tracking-wide">
-                  Created By
-                </label>
-                <p className="text-sm text-secondary-900">
-                  {contact.CreatedBy?.Name || contact.CreatedBy}
-                </p>
-              </div>
-            )}
-            
-            {contact.ModifiedOn && (
-              <div className="space-y-1">
-                <label className="text-xs font-medium text-secondary-600 uppercase tracking-wide">
-                  Modified On
-                </label>
-                <p className="text-sm text-secondary-900">
-                  {new Date(contact.ModifiedOn).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                  })}
-                </p>
-              </div>
-            )}
-            
-            {contact.ModifiedBy && (
-              <div className="space-y-1">
-                <label className="text-xs font-medium text-secondary-600 uppercase tracking-wide">
-                  Modified By
-                </label>
-                <p className="text-sm text-secondary-900">
-                  {contact.ModifiedBy?.Name || contact.ModifiedBy}
-                </p>
-              </div>
-            )}
           </div>
         </div>
       )}
