@@ -50,7 +50,20 @@
       },
       "redirectOnDeny": "/login"
     }
-  },
+},
+  "/companies/:id": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "User must be logged in to view company details",
+            "rule": "authenticated"
+          }
+        ]
+      },
+      "redirectOnDeny": "/login"
+    }
+   },
   "/login": {
     "allow": {
       "when": {
