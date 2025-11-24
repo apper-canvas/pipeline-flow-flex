@@ -188,10 +188,10 @@ const ContactDetails = ({ contact, onEdit, onClose }) => {
                       <p className="text-secondary-900">{contact.Owner?.Name || contact.Owner}</p>
                     </div>
                   )}
-                  {contact.CreatedOn && (
+{contact.CreatedOn && (
                     <div>
                       <label className="text-sm font-medium text-secondary-600">Created On</label>
-                      <p className="text-secondary-900">{formatDistanceToNow(new Date(contact.CreatedOn), { addSuffix: true })}</p>
+                      <p className="text-secondary-900">{format(new Date(contact.CreatedOn), 'MMM dd, yyyy hh:mm a')}</p>
                     </div>
                   )}
                   {contact.CreatedBy && (
@@ -202,8 +202,8 @@ const ContactDetails = ({ contact, onEdit, onClose }) => {
                   )}
                   {contact.ModifiedOn && (
                     <div>
-                      <label className="text-sm font-medium text-secondary-600">Modified On</label>
-                      <p className="text-secondary-900">{formatDistanceToNow(new Date(contact.ModifiedOn), { addSuffix: true })}</p>
+<label className="text-sm font-medium text-secondary-600">Modified On</label>
+                      <p className="text-secondary-900">{format(new Date(contact.ModifiedOn), 'MMM dd, yyyy hh:mm a')}</p>
                     </div>
                   )}
                   {contact.ModifiedBy && (
