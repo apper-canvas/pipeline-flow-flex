@@ -67,7 +67,7 @@ const mainRoutes = [
     index: true,
     element: <Dashboard />,
     title: 'Dashboard'
-}),
+  }),
   createRoute({
     path: 'contacts',
     element: <Contacts />,
@@ -79,24 +79,26 @@ const mainRoutes = [
     title: 'Pipeline'
   }),
   createRoute({
-createRoute({
     path: 'quotes',
     element: <Quotes />,
     title: 'Quotes'
   }),
   createRoute({
     path: "companies",
-    element: <Companies />
+    element: <Companies />,
+    title: 'Companies'
   }),
   createRoute({
     path: "companies/:id",
-    element: <CompanyDetails />
+    element: <CompanyDetails />,
+    title: 'Company Details'
+  }),
   createRoute({
     path: "*",
-    element: <NotFound />
+    element: <NotFound />,
+    title: 'Page Not Found'
   })
 ];
-
 const routes = [
   {
     path: "/",
