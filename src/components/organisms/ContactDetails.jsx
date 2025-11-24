@@ -158,7 +158,7 @@ const ContactDetails = ({ contact, onEdit, onClose }) => {
         {activeTab === "info" && (
           <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
+<div>
                 <h3 className="text-lg font-semibold text-secondary-900 mb-4">Contact Information</h3>
                 <div className="space-y-3">
                   <div>
@@ -175,6 +175,43 @@ const ContactDetails = ({ contact, onEdit, onClose }) => {
                     <label className="text-sm font-medium text-secondary-600">Company</label>
                     <p className="text-secondary-900">{contact.company}</p>
                   </div>
+                </div>
+              </div>
+
+              {/* Record Information Section */}
+              <div>
+                <h3 className="text-lg font-semibold text-secondary-900 mb-4">Record Information</h3>
+                <div className="space-y-3">
+                  {contact.Owner && (
+                    <div>
+                      <label className="text-sm font-medium text-secondary-600">Owner</label>
+                      <p className="text-secondary-900">{contact.Owner?.Name || contact.Owner}</p>
+                    </div>
+                  )}
+                  {contact.CreatedOn && (
+                    <div>
+                      <label className="text-sm font-medium text-secondary-600">Created On</label>
+                      <p className="text-secondary-900">{formatDistanceToNow(new Date(contact.CreatedOn), { addSuffix: true })}</p>
+                    </div>
+                  )}
+                  {contact.CreatedBy && (
+                    <div>
+                      <label className="text-sm font-medium text-secondary-600">Created By</label>
+                      <p className="text-secondary-900">{contact.CreatedBy?.Name || contact.CreatedBy}</p>
+                    </div>
+                  )}
+                  {contact.ModifiedOn && (
+                    <div>
+                      <label className="text-sm font-medium text-secondary-600">Modified On</label>
+                      <p className="text-secondary-900">{formatDistanceToNow(new Date(contact.ModifiedOn), { addSuffix: true })}</p>
+                    </div>
+                  )}
+                  {contact.ModifiedBy && (
+                    <div>
+                      <label className="text-sm font-medium text-secondary-600">Modified By</label>
+                      <p className="text-secondary-900">{contact.ModifiedBy?.Name || contact.ModifiedBy}</p>
+                    </div>
+                  )}
                 </div>
               </div>
               
