@@ -50,32 +50,6 @@
       },
       "redirectOnDeny": "/login"
     }
-},
-  "/companies/:id": {
-    "allow": {
-      "when": {
-        "conditions": [
-          {
-            "label": "User must be logged in to view company details",
-            "rule": "authenticated"
-          }
-        ]
-      },
-      "redirectOnDeny": "/login"
-    }
-},
-  "/quotes": {
-    "allow": {
-      "when": {
-        "conditions": [
-          {
-            "label": "User must be authenticated to access quotes",
-            "rule": "authenticated"
-          }
-        ]
-      },
-      "redirectOnDeny": "/login"
-    }
   },
   "/login": {
     "allow": {

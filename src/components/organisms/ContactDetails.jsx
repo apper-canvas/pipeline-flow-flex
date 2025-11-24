@@ -188,6 +188,12 @@ const ContactDetails = ({ contact, onEdit, onClose }) => {
                       <p className="text-secondary-900">{contact.Owner?.Name || contact.Owner}</p>
                     </div>
                   )}
+{contact.CreatedOn && (
+                    <div>
+                      <label className="text-sm font-medium text-secondary-600">Created On</label>
+                      <p className="text-secondary-900">{format(new Date(contact.CreatedOn), 'MMM dd, yyyy hh:mm a')}</p>
+                    </div>
+                  )}
                   {contact.CreatedBy && (
                     <div>
                       <label className="text-sm font-medium text-secondary-600">Created By</label>

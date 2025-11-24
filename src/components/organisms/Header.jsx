@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import ApperIcon from "@/components/ApperIcon";
 import LogoutButton from "@/components/atoms/LogoutButton";
-import Companies from "@/components/pages/Companies";
 import { cn } from "@/utils/cn";
 
 function Header() {
@@ -23,26 +22,26 @@ function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           {/* Logo */}
-<div className="flex items-center">
+          <div className="flex items-center">
             <Link to="/dashboard" className="flex items-center gap-2">
               <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center">
                 <ApperIcon name="Zap" size={20} className="text-white" />
               </div>
-              <span className="text-lg font-bold text-secondary-900">CRM</span>
+              <span className="font-bold text-xl text-secondary-900">PipelineFlow</span>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center space-x-8">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 to={item.href}
                 className={cn(
-                  'flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors',
+                  "flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
                   isActive(item.href)
-                    ? 'text-primary-600 bg-primary-50'
-                    : 'text-secondary-600 hover:text-secondary-900 hover:bg-secondary-50'
+                    ? "bg-primary-50 text-primary-600"
+                    : "text-secondary-600 hover:text-secondary-900 hover:bg-secondary-50"
                 )}
               >
                 <ApperIcon name={item.icon} size={16} />
@@ -54,6 +53,7 @@ function Header() {
           {/* Right side */}
           <div className="flex items-center gap-4">
             <LogoutButton />
+            
             {/* Mobile menu button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
