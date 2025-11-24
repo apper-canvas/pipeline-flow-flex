@@ -63,7 +63,20 @@
       },
       "redirectOnDeny": "/login"
     }
-   },
+},
+  "/quotes": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "User must be authenticated to access quotes",
+            "rule": "authenticated"
+          }
+        ]
+      },
+      "redirectOnDeny": "/login"
+    }
+  },
   "/login": {
     "allow": {
       "when": {

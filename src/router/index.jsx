@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import React, { Suspense, lazy } from "react";
 import { getRouteConfig } from "@/router/route.utils";
-
 // Lazy load all page components
 const Root = lazy(() => import('@/layouts/Root'));
 const Layout = lazy(() => import('@/components/organisms/Layout'));
@@ -10,6 +9,7 @@ const Contacts = lazy(() => import('@/components/pages/Contacts'));
 const Pipeline = lazy(() => import('@/components/pages/Pipeline'));
 const Companies = lazy(() => import('@/components/pages/Companies'));
 const CompanyDetails = lazy(() => import('@/components/organisms/CompanyDetails'));
+const Quotes = lazy(() => import('@/components/pages/Quotes'));
 const NotFound = lazy(() => import('@/components/pages/NotFound'));
 
 // Authentication pages
@@ -67,24 +67,30 @@ const mainRoutes = [
     index: true,
     element: <Dashboard />,
     title: 'Dashboard'
-  }),
+}),
   createRoute({
     path: 'contacts',
     element: <Contacts />,
     title: 'Contacts'
-}),
-  createRoute({
-    path: "pipeline", 
-    element: <Pipeline />
   }),
+  createRoute({
+    path: 'pipeline',
+    element: <Pipeline />,
+    title: 'Pipeline'
+  }),
+  createRoute({
 createRoute({
+    path: 'quotes',
+    element: <Quotes />,
+    title: 'Quotes'
+  }),
+  createRoute({
     path: "companies",
     element: <Companies />
   }),
   createRoute({
     path: "companies/:id",
     element: <CompanyDetails />
-  }),
   createRoute({
     path: "*",
     element: <NotFound />
