@@ -246,7 +246,7 @@ function CompanyDetails() {
           <div className="bg-white rounded-lg border border-secondary-200 p-6">
             <h3 className="text-sm font-medium text-secondary-600 mb-3">Record Information</h3>
             <div className="space-y-3">
-              {company.CreatedOn && (
+{company.CreatedOn && (
                 <div>
                   <label className="text-xs text-secondary-500">Created</label>
                   <p className="text-sm text-secondary-900">
@@ -255,6 +255,11 @@ function CompanyDetails() {
                   <p className="text-xs text-secondary-500">
                     {formatDistanceToNow(new Date(company.CreatedOn), { addSuffix: true })}
                   </p>
+                  {company.CreatedBy && (
+                    <p className="text-xs text-secondary-600 mt-1">
+                      by {company.CreatedBy.Name || 'Unknown User'}
+                    </p>
+                  )}
                 </div>
               )}
               {company.ModifiedOn && (
@@ -266,6 +271,11 @@ function CompanyDetails() {
                   <p className="text-xs text-secondary-500">
                     {formatDistanceToNow(new Date(company.ModifiedOn), { addSuffix: true })}
                   </p>
+                  {company.ModifiedBy && (
+                    <p className="text-xs text-secondary-600 mt-1">
+                      by {company.ModifiedBy.Name || 'Unknown User'}
+                    </p>
+                  )}
                 </div>
               )}
             </div>
