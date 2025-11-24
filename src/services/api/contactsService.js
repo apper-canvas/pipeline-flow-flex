@@ -7,7 +7,7 @@ export const contactsService = {
     try {
       const apperClient = getApperClient();
       
-      const params = {
+const params = {
         fields: [
           {"field": {"Name": "Id"}},
           {"field": {"Name": "Name"}},
@@ -17,7 +17,9 @@ export const contactsService = {
           {"field": {"Name": "notes_c"}},
           {"field": {"Name": "Tags"}},
           {"field": {"Name": "CreatedOn"}},
-          {"field": {"Name": "ModifiedOn"}}
+          {"field": {"Name": "CreatedBy"}},
+          {"field": {"Name": "ModifiedOn"}},
+          {"field": {"Name": "ModifiedBy"}}
         ]
       };
       
@@ -56,7 +58,7 @@ export const contactsService = {
       const apperClient = getApperClient();
       const tableName = 'contacts_c';
       
-      const params = {
+const params = {
         fields: [
           {"field": {"Name": "Id"}},
           {"field": {"Name": "Name"}},
@@ -66,7 +68,9 @@ export const contactsService = {
           {"field": {"Name": "notes_c"}},
           {"field": {"Name": "Tags"}},
           {"field": {"Name": "CreatedOn"}},
-          {"field": {"Name": "ModifiedOn"}}
+          {"field": {"Name": "CreatedBy"}},
+          {"field": {"Name": "ModifiedOn"}},
+          {"field": {"Name": "ModifiedBy"}}
         ]
       };
       
