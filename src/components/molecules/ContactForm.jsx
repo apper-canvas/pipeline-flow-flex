@@ -150,7 +150,7 @@ const validateForm = () => {
         <div className="space-y-4 pt-4 border-t border-secondary-200">
           <h3 className="text-sm font-medium text-secondary-700">System Information</h3>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {contact.Owner && (
               <div className="space-y-1">
                 <label className="text-xs font-medium text-secondary-600 uppercase tracking-wide">
@@ -162,6 +162,22 @@ const validateForm = () => {
               </div>
             )}
             
+            {contact.CreatedOn && (
+              <div className="space-y-1">
+                <label className="text-xs font-medium text-secondary-600 uppercase tracking-wide">
+                  Created On
+                </label>
+                <p className="text-sm text-secondary-900">
+                  {new Date(contact.CreatedOn).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                  })}
+                </p>
+              </div>
+            )}
           </div>
         </div>
       )}
