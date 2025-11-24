@@ -4,7 +4,7 @@ import ApperIcon from '@/components/ApperIcon';
 import Button from '@/components/atoms/Button';
 import Input from '@/components/atoms/Input';
 import Badge from '@/components/atoms/Badge';
-import Card from '@/components/atoms/Card';
+import { Card } from '@/components/atoms/Card';
 import Modal from '@/components/atoms/Modal';
 import Loading from '@/components/ui/Loading';
 import Error from '@/components/ui/Error';
