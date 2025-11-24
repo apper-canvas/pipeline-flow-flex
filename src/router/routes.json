@@ -36,6 +36,19 @@
         ]
       },
       "redirectOnDeny": "/login"
+}
+  },
+  "/companies": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "User must be logged in to view companies",
+            "rule": "authenticated"
+          }
+        ]
+      },
+      "redirectOnDeny": "/login"
     }
   },
   "/login": {

@@ -8,6 +8,7 @@ const Layout = lazy(() => import('@/components/organisms/Layout'));
 const Dashboard = lazy(() => import('@/components/pages/Dashboard'));
 const Contacts = lazy(() => import('@/components/pages/Contacts'));
 const Pipeline = lazy(() => import('@/components/pages/Pipeline'));
+const Companies = lazy(() => import('@/components/pages/Companies'));
 const NotFound = lazy(() => import('@/components/pages/NotFound'));
 
 // Authentication pages
@@ -70,10 +71,14 @@ const mainRoutes = [
     path: 'contacts',
     element: <Contacts />,
     title: 'Contacts'
-  }),
+}),
   createRoute({
     path: "pipeline", 
     element: <Pipeline />
+  }),
+  createRoute({
+    path: "companies",
+    element: <Companies />
   }),
   createRoute({
     path: "*",
