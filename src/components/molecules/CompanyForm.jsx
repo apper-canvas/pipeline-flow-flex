@@ -14,7 +14,7 @@ const INDUSTRY_OPTIONS = [
 ];
 
 function CompanyForm({ company, onSubmit, onCancel }) {
-  const [formData, setFormData] = useState({
+const [formData, setFormData] = useState({
     Name: '',
     Tags: '',
     industry_c: '',
@@ -23,7 +23,12 @@ function CompanyForm({ company, onSubmit, onCancel }) {
     website_c: '',
     revenue_c: '',
     employees_c: '',
-    description_c: ''
+    description_c: '',
+    CreatedOn: '',
+    CreatedBy: null,
+    ModifiedOn: '',
+    ModifiedBy: null,
+    Owner: null
   });
 
   const [errors, setErrors] = useState({});
@@ -32,7 +37,7 @@ function CompanyForm({ company, onSubmit, onCancel }) {
   // Initialize form data when company prop changes
   useEffect(() => {
     if (company) {
-      setFormData({
+setFormData({
         Name: company.Name || '',
         Tags: company.Tags || '',
         industry_c: company.industry_c || '',
@@ -41,10 +46,15 @@ function CompanyForm({ company, onSubmit, onCancel }) {
         website_c: company.website_c || '',
         revenue_c: company.revenue_c ? company.revenue_c.toString() : '',
         employees_c: company.employees_c ? company.employees_c.toString() : '',
-        description_c: company.description_c || ''
+        description_c: company.description_c || '',
+        CreatedOn: company.CreatedOn || '',
+        CreatedBy: company.CreatedBy || null,
+        ModifiedOn: company.ModifiedOn || '',
+        ModifiedBy: company.ModifiedBy || null,
+        Owner: company.Owner || null
       });
     } else {
-      setFormData({
+setFormData({
         Name: '',
         Tags: '',
         industry_c: '',
@@ -53,7 +63,12 @@ function CompanyForm({ company, onSubmit, onCancel }) {
         website_c: '',
         revenue_c: '',
         employees_c: '',
-        description_c: ''
+        description_c: '',
+        CreatedOn: '',
+        CreatedBy: null,
+        ModifiedOn: '',
+        ModifiedBy: null,
+        Owner: null
       });
     }
   }, [company]);
@@ -272,9 +287,82 @@ function CompanyForm({ company, onSubmit, onCancel }) {
           onChange={(e) => handleInputChange('description_c', e.target.value)}
           placeholder="Enter company description"
           rows={4}
-          className="w-full px-3 py-2 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
+className="w-full px-3 py-2 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
         />
       </div>
+
+      {/* System Fields - Show only when editing existing record */}
+      {company && (
+        <>
+          <hr className="border-secondary-200" />
+          
+          {/* Owner */}
+          <div>
+            <label className="block text-sm font-medium text-secondary-700 mb-2">
+              Owner
+            </label>
+            <Input
+              type="text"
+              value={formData.Owner?.Name || 'N/A'}
+              disabled
+              className="bg-secondary-50 text-secondary-600"
+            />
+          </div>
+
+          {/* Created and Modified Information */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-secondary-700 mb-2">
+                Created On
+              </label>
+              <Input
+                type="text"
+                value={formData.CreatedOn ? new Date(formData.CreatedOn).toLocaleString() : 'N/A'}
+                disabled
+                className="bg-secondary-50 text-secondary-600"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-secondary-700 mb-2">
+                Created By
+              </label>
+              <Input
+                type="text"
+                value={formData.CreatedBy?.Name || 'N/A'}
+                disabled
+                className="bg-secondary-50 text-secondary-600"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-secondary-700 mb-2">
+                Modified On
+              </label>
+              <Input
+                type="text"
+                value={formData.ModifiedOn ? new Date(formData.ModifiedOn).toLocaleString() : 'N/A'}
+                disabled
+                className="bg-secondary-50 text-secondary-600"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-secondary-700 mb-2">
+                Modified By
+              </label>
+              <Input
+                type="text"
+                value={formData.ModifiedBy?.Name || 'N/A'}
+                disabled
+                className="bg-secondary-50 text-secondary-600"
+              />
+            </div>
+          </div>
+        </>
+      )}
 
       {/* Action Buttons */}
       <div className="flex justify-end gap-3 pt-4 border-t border-secondary-200">

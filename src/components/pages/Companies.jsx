@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '@/components/atoms/Button';
 import Modal from '@/components/atoms/Modal';
 import Badge from '@/components/atoms/Badge';
@@ -20,11 +21,12 @@ function Companies() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   
+const navigate = useNavigate();
+  
   // Modal states
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedCompany, setSelectedCompany] = useState(null);
-  
   // Search and filter states
   const [searchTerm, setSearchTerm] = useState('');
   const [industryFilter, setIndustryFilter] = useState('');
@@ -103,11 +105,16 @@ function Companies() {
   };
 
   // Handle company editing
+// Handle viewing company details
+  const handleViewCompany = (company) => {
+    navigate(`/companies/${company.Id}`);
+  };
+
+  // Handle company editing
   const handleEditCompany = (company) => {
     setSelectedCompany(company);
     setIsEditModalOpen(true);
   };
-
   // Handle form submission for create/update
   const handleSubmitCompany = async (companyData) => {
     try {
@@ -318,12 +325,17 @@ function Companies() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-secondary-200">
-                {filteredCompanies.map((company) => (
-                  <tr key={company.Id} className="hover:bg-secondary-50">
+{filteredCompanies.map((company) => (
+<tr key={company.Id} className="hover:bg-secondary-50">
                     <td className="py-3 px-4">
                       <div>
                         <div className="font-medium text-secondary-900">
-                          {company.Name}
+                          <button
+                            onClick={() => handleViewCompany(company)}
+                            className="text-left hover:text-primary-600 transition-colors"
+                          >
+                            {company.Name}
+                          </button>
                         </div>
                         {company.Tags && (
                           <div className="flex flex-wrap gap-1 mt-1">
@@ -381,8 +393,16 @@ function Companies() {
                     <td className="py-3 px-4 text-sm text-secondary-600">
                       {company.ModifiedOn && formatDistanceToNow(new Date(company.ModifiedOn), { addSuffix: true })}
                     </td>
-                    <td className="py-3 px-4">
+<td className="py-3 px-4">
                       <div className="flex items-center justify-end gap-2">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => handleViewCompany(company)}
+                          title="View company details"
+                        >
+                          <ApperIcon name="Eye" size={14} />
+                        </Button>
                         <Button
                           variant="ghost"
                           size="sm"

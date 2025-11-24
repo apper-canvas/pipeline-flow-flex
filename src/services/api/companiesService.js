@@ -31,7 +31,7 @@ export const companiesService = {
       }
 
       const requestParams = {
-        fields: [
+fields: [
           {"field": {"Name": "Name"}},
           {"field": {"Name": "Tags"}},
           {"field": {"Name": "industry_c"}},
@@ -42,7 +42,9 @@ export const companiesService = {
           {"field": {"Name": "address_c"}},
           {"field": {"Name": "description_c"}},
           {"field": {"Name": "CreatedOn"}},
+          {"field": {"Name": "CreatedBy"}},
           {"field": {"Name": "ModifiedOn"}},
+          {"field": {"Name": "ModifiedBy"}},
           {"field": {"Name": "Owner"}}
         ],
         where: whereConditions,
@@ -86,7 +88,7 @@ export const companiesService = {
       }
 
       const params = {
-        fields: [
+fields: [
           {"field": {"Name": "Name"}},
           {"field": {"Name": "Tags"}},
           {"field": {"Name": "industry_c"}},
@@ -97,7 +99,9 @@ export const companiesService = {
           {"field": {"Name": "address_c"}},
           {"field": {"Name": "description_c"}},
           {"field": {"Name": "CreatedOn"}},
+          {"field": {"Name": "CreatedBy"}},
           {"field": {"Name": "ModifiedOn"}},
+          {"field": {"Name": "ModifiedBy"}},
           {"field": {"Name": "Owner"}}
         ]
       };
