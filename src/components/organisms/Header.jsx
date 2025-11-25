@@ -9,11 +9,12 @@ function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
-  const navigation = [
+const navigation = [
     { name: 'Dashboard', href: '/dashboard', icon: 'LayoutDashboard' },
     { name: 'Pipeline', href: '/pipeline', icon: 'GitBranch' },
     { name: 'Contacts', href: '/contacts', icon: 'Users' },
     { name: 'Companies', href: '/companies', icon: 'Building' },
+    { name: 'Quotes', href: '/quotes', icon: 'FileText' },
   ];
 
   const isActive = (href) => location.pathname === href;
