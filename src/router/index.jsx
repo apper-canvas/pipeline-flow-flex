@@ -69,6 +69,11 @@ const mainRoutes = [
     title: 'Dashboard'
   }),
   createRoute({
+    path: 'dashboard',
+    element: <Dashboard />,
+    title: 'Dashboard'
+  }),
+  createRoute({
     path: 'contacts',
     element: <Contacts />,
     title: 'Contacts'

@@ -11,6 +11,19 @@
       },
       "redirectOnDeny": "/login"
     }
+},
+  "/dashboard": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "User must be authenticated to access dashboard",
+            "rule": "authenticated"
+          }
+        ]
+      },
+      "redirectOnDeny": "/login"
+    }
   },
   "/contacts": {
     "allow": {
