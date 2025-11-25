@@ -133,9 +133,9 @@ export default function Quotes() {
       {/* Filters and Search */}
       <div className="flex flex-col sm:flex-row gap-4 mb-6">
         <div className="flex-1">
-          <SearchBar
+<SearchBar
             value={searchTerm}
-            onChange={setSearchTerm}
+            onChange={(value) => setSearchTerm(value)}
             placeholder="Search quotes..."
           />
         </div>

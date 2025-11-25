@@ -16,11 +16,11 @@ const SearchBar = ({
         size={16} 
         className="absolute left-3 top-1/2 transform -translate-y-1/2 text-secondary-400" 
       />
-      <Input
+<Input
         type="text"
         placeholder={placeholder}
         value={value}
-        onChange={onChange}
+        onChange={(e) => onChange(e.target.value)}
         className="pl-10 pr-8"
       />
       {value && (
