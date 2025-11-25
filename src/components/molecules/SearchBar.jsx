@@ -24,8 +24,8 @@ const SearchBar = ({
         className="pl-10 pr-8"
       />
       {value && (
-        <button
-          onClick={() => onChange({ target: { value: "" } })}
+<button
+          onClick={() => onChange("")}
           className="absolute right-3 top-1/2 transform -translate-y-1/2 text-secondary-400 hover:text-secondary-600"
         >
           <ApperIcon name="X" size={16} />
