@@ -72,7 +72,7 @@ export default function QuoteForm({ quote, onSubmit, onCancel }) {
     }
   }, [quote]);
 
-  const loadData = async () => {
+const loadData = async () => {
     try {
       const [companiesData, contactsData, dealsData] = await Promise.all([
         companiesService.getAll(),
@@ -80,12 +80,17 @@ export default function QuoteForm({ quote, onSubmit, onCancel }) {
         dealsService.getAll()
       ]);
       
-      setCompanies(companiesData);
-      setContacts(contactsData);
-      setDeals(dealsData);
+      // Ensure we always set arrays, even if services return unexpected data
+      setCompanies(Array.isArray(companiesData) ? companiesData : []);
+      setContacts(Array.isArray(contactsData) ? contactsData : []);
+      setDeals(Array.isArray(dealsData) ? dealsData : []);
     } catch (error) {
       console.error('Error loading data:', error);
       toast.error('Failed to load form data');
+      // Set empty arrays on error to prevent map errors
+      setCompanies([]);
+      setContacts([]);
+      setDeals([]);
     } finally {
       setLoading(false);
     }
@@ -181,7 +186,7 @@ export default function QuoteForm({ quote, onSubmit, onCancel }) {
             className="w-full px-3 py-2 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
           >
             <option value="">Select Company</option>
-            {companies.map(company => (
+{(companies || []).map(company => (
               <option key={company.Id} value={company.Id}>
                 {company.Name}
               </option>
@@ -200,7 +205,7 @@ export default function QuoteForm({ quote, onSubmit, onCancel }) {
             className="w-full px-3 py-2 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
           >
             <option value="">Select Contact</option>
-            {contacts.map(contact => (
+{(contacts || []).map(contact => (
               <option key={contact.Id} value={contact.Id}>
                 {contact.Name}
               </option>
@@ -219,7 +224,7 @@ export default function QuoteForm({ quote, onSubmit, onCancel }) {
             className="w-full px-3 py-2 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
           >
             <option value="">Select Deal</option>
-            {deals.map(deal => (
+{(deals || []).map(deal => (
               <option key={deal.Id} value={deal.Id}>
                 {deal.title_c || deal.Name}
               </option>
