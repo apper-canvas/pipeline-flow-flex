@@ -83,8 +83,9 @@ const mainRoutes = [
     path: 'pipeline',
     element: <Pipeline />,
     title: 'Pipeline'
-  }),
-path: 'companies',
+}),
+  createRoute({
+    path: 'companies',
     element: <Companies />,
     title: 'Companies'
   }),
