@@ -15,6 +15,7 @@ const navigation = [
     { name: 'Contacts', href: '/contacts', icon: 'Users' },
     { name: 'Companies', href: '/companies', icon: 'Building' },
     { name: 'Quotes', href: '/quotes', icon: 'FileText' },
+    { name: 'Sales Orders', href: '/sales-orders', icon: 'ShoppingCart' },
   ];
 
   const isActive = (href) => location.pathname === href;
