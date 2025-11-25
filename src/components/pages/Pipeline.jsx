@@ -11,15 +11,22 @@ import Button from "@/components/atoms/Button";
 import PipelineBoard from "@/components/organisms/PipelineBoard";
 import DealForm from "@/components/molecules/DealForm";
 import DealDetails from "@/components/organisms/DealDetails";
+import SearchBar from "@/components/molecules/SearchBar";
 const Pipeline = () => {
-  const [deals, setDeals] = useState([]);
+const [deals, setDeals] = useState([]);
   const [contacts, setContacts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 const [showDealModal, setShowDealModal] = useState(false);
   const [showDealDetailsModal, setShowDealDetailsModal] = useState(false);
   const [selectedDeal, setSelectedDeal] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Handle search functionality
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+  };
 
   const loadData = async () => {
     setLoading(true);
@@ -154,29 +161,57 @@ const handleEditDeal = (deal) => {
     );
   }
 
-  const activeDeals = deals.filter(deal => !["closed-won", "closed-lost"].includes(deal.stage));
-  const totalPipelineValue = activeDeals.reduce((sum, deal) => sum + deal.value, 0);
+// Filter deals based on search query
+  const filteredDeals = deals.filter(deal => {
+    if (!searchQuery.trim()) return true;
+    
+    const query = searchQuery.toLowerCase();
+    const contactName = contacts.find(c => c.Id === deal.contactId)?.name || '';
+    
+    return (
+      deal.name?.toLowerCase().includes(query) ||
+      deal.company?.toLowerCase().includes(query) ||
+      contactName.toLowerCase().includes(query) ||
+      deal.stage?.toLowerCase().includes(query)
+    );
+  });
 
+  const activeDeals = filteredDeals.filter(deal => !["closed-won", "closed-lost"].includes(deal.stage));
+  const totalPipelineValue = activeDeals.reduce((sum, deal) => sum + deal.value, 0);
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-bold text-secondary-900 mb-2">Sales Pipeline</h1>
-          <p className="text-secondary-600">
-            {activeDeals.length} active deals worth ${totalPipelineValue.toLocaleString()}
-          </p>
+<div className="flex flex-col gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+          <div>
+            <h1 className="text-3xl font-bold text-secondary-900 mb-2">Sales Pipeline</h1>
+            <p className="text-secondary-600">
+              {activeDeals.length} active deals worth ${totalPipelineValue.toLocaleString()}
+              {searchQuery && ` (filtered from ${deals.filter(deal => !["closed-won", "closed-lost"].includes(deal.stage)).length} total)`}
+            </p>
+          </div>
+          <Button onClick={handleCreateDeal} variant="primary" className="sm:shrink-0">
+            <ApperIcon name="Plus" size={16} className="mr-2" />
+            Add Deal
+          </Button>
         </div>
-        <Button onClick={handleCreateDeal} variant="primary">
-          <ApperIcon name="Plus" size={16} className="mr-2" />
-          Add Deal
-        </Button>
+        
+        <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex-1">
+            <SearchBar
+              value={searchQuery}
+              onChange={handleSearch}
+              placeholder="Search deals by name, company, contact, or stage..."
+              className="w-full"
+            />
+          </div>
+        </div>
       </div>
 
       {/* Pipeline Board */}
       <div className="min-h-[600px]">
 <PipelineBoard
-          deals={deals}
+deals={filteredDeals}
           contacts={contacts}
           onMoveCard={handleMoveCard}
           onEditDeal={handleEditDeal}
