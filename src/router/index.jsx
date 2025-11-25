@@ -10,6 +10,7 @@ const Pipeline = lazy(() => import('@/components/pages/Pipeline'));
 const Companies = lazy(() => import('@/components/pages/Companies'));
 const CompanyDetails = lazy(() => import('@/components/organisms/CompanyDetails'));
 const Quotes = lazy(() => import('@/components/pages/Quotes'));
+const SalesOrders = lazy(() => import('@/components/pages/SalesOrders'));
 const NotFound = lazy(() => import('@/components/pages/NotFound'));
 
 // Authentication pages
@@ -83,20 +84,24 @@ const mainRoutes = [
     element: <Pipeline />,
     title: 'Pipeline'
   }),
+path: 'companies',
+    element: <Companies />,
+    title: 'Companies'
+  }),
+  createRoute({
+    path: 'companies/:id',
+    element: <CompanyDetails />,
+    title: 'Company Details'
+  }),
   createRoute({
     path: 'quotes',
     element: <Quotes />,
     title: 'Quotes'
   }),
   createRoute({
-    path: "companies",
-    element: <Companies />,
-    title: 'Companies'
-  }),
-  createRoute({
-    path: "companies/:id",
-    element: <CompanyDetails />,
-    title: 'Company Details'
+    path: 'sales-orders',
+    element: <SalesOrders />,
+    title: 'Sales Orders'
   }),
   createRoute({
     path: "*",
