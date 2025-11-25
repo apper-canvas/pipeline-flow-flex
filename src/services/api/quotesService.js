@@ -16,8 +16,13 @@ class QuotesService {
     }
   }
 
-  async getAll(searchTerm = '', statusFilter = '', limit = 50, offset = 0) {
+async getAll(searchTerm = '', statusFilter = '', limit = 50, offset = 0) {
     try {
+      // Sanitize and validate input parameters to prevent circular structure issues
+      const sanitizedSearchTerm = this.sanitizeInput(searchTerm);
+      const sanitizedStatusFilter = this.sanitizeInput(statusFilter);
+      const sanitizedLimit = Number(limit) || 50;
+      const sanitizedOffset = Number(offset) || 0;
       if (!this.apperClient) {
         await this.initializeClient();
       }
@@ -39,26 +44,28 @@ class QuotesService {
           {"field": {"Name": "ModifiedOn"}}
         ],
         where: [],
-        orderBy: [{"fieldName": "ModifiedOn", "sorttype": "DESC"}],
-        pagingInfo: { limit, offset }
+orderBy: [{"fieldName": "ModifiedOn", "sorttype": "DESC"}],
+        pagingInfo: { limit: sanitizedLimit, offset: sanitizedOffset }
       };
 
       // Add search filter if provided
-      if (searchTerm) {
+// Add search filter if provided (using sanitized input)
+      if (sanitizedSearchTerm && sanitizedSearchTerm.trim()) {
         params.where.push({
           "FieldName": "Name",
           "Operator": "Contains",
-          "Values": [searchTerm],
+          "Values": [sanitizedSearchTerm.trim()],
           "Include": true
         });
       }
 
       // Add status filter if provided
-      if (statusFilter && statusFilter !== 'all') {
+// Add status filter if provided (using sanitized input)
+      if (sanitizedStatusFilter && sanitizedStatusFilter !== 'all') {
         params.where.push({
           "FieldName": "status_c",
           "Operator": "EqualTo",
-          "Values": [statusFilter],
+          "Values": [sanitizedStatusFilter],
           "Include": true
         });
       }
@@ -354,6 +361,36 @@ class QuotesService {
       currency: 'USD',
       minimumFractionDigits: 2
     }).format(amount);
+}
+
+  // Helper method to sanitize inputs and prevent circular structure issues
+  sanitizeInput(input) {
+    // Handle null, undefined, or empty values
+    if (input === null || input === undefined) {
+      return '';
+    }
+    
+    // If input is an object (including DOM elements), extract the value property or convert to string
+    if (typeof input === 'object') {
+      // Handle React synthetic events or DOM elements
+      if (input.target && input.target.value !== undefined) {
+        return String(input.target.value);
+      }
+      // Handle objects with a value property
+      if (input.value !== undefined) {
+        return String(input.value);
+      }
+      // For other objects, try to convert to string safely
+      try {
+        return String(input);
+      } catch (error) {
+        console.error('Error converting input to string:', error);
+        return '';
+      }
+    }
+    
+    // For primitive values, convert to string
+    return String(input);
   }
 }
 
