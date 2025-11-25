@@ -66,8 +66,8 @@ useEffect(() => {
     let filtered = [...companies];
 
     // Apply search filter
-    if (searchTerm && String(searchTerm).trim()) {
-      const search = String(searchTerm).toLowerCase();
+    if (searchTerm && typeof searchTerm === 'string' && searchTerm.trim()) {
+      const search = searchTerm.toLowerCase().trim();
       filtered = filtered.filter(company => 
         company.Name?.toLowerCase().includes(search) ||
         company.industry_c?.toLowerCase().includes(search) ||
