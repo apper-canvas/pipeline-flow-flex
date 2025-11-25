@@ -193,9 +193,9 @@ const Contacts = () => {
           {/* Search and Filters */}
           <div className="flex flex-col sm:flex-row gap-4">
             <div className="flex-1">
-              <SearchBar
+<SearchBar
                 value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+                onChange={setSearchTerm}
                 placeholder="Search contacts by name, email, or company..."
               />
             </div>
