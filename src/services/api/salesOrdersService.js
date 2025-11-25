@@ -24,14 +24,14 @@ class SalesOrdersService {
 
       const params = {
         fields: [
-          {"field": {"Name": "Id"}},
+{"field": {"Name": "Id"}},
           {"field": {"Name": "Name"}},
           {"field": {"Name": "title_c"}},
           {"field": {"Name": "order_date_c"}},
-          {"field": {"Name": "contactId_c"}},
-          {"field": {"Name": "companyId_c"}},
-          {"field": {"Name": "dealId_c"}},
-          {"field": {"Name": "quoteId_c"}},
+          {"field": {"Name": "contactId_c"}, "referenceField": {"field": {"Name": "Name"}}},
+          {"field": {"Name": "companyId_c"}, "referenceField": {"field": {"Name": "Name"}}},
+          {"field": {"Name": "dealId_c"}, "referenceField": {"field": {"Name": "Name"}}},
+          {"field": {"Name": "quoteId_c"}, "referenceField": {"field": {"Name": "Name"}}},
           {"field": {"Name": "total_amount_c"}},
           {"field": {"Name": "status_c"}},
           {"field": {"Name": "payment_method_c"}},
@@ -89,14 +89,14 @@ class SalesOrdersService {
 
       const params = {
         fields: [
-          {"field": {"Name": "Id"}},
+{"field": {"Name": "Id"}},
           {"field": {"Name": "Name"}},
           {"field": {"Name": "title_c"}},
           {"field": {"Name": "order_date_c"}},
-          {"field": {"Name": "contactId_c"}},
-          {"field": {"Name": "companyId_c"}},
-          {"field": {"Name": "dealId_c"}},
-          {"field": {"Name": "quoteId_c"}},
+          {"field": {"Name": "contactId_c"}, "referenceField": {"field": {"Name": "Name"}}},
+          {"field": {"Name": "companyId_c"}, "referenceField": {"field": {"Name": "Name"}}},
+          {"field": {"Name": "dealId_c"}, "referenceField": {"field": {"Name": "Name"}}},
+          {"field": {"Name": "quoteId_c"}, "referenceField": {"field": {"Name": "Name"}}},
           {"field": {"Name": "total_amount_c"}},
           {"field": {"Name": "status_c"}},
           {"field": {"Name": "shipping_address_c"}},
