@@ -414,7 +414,7 @@ const loadData = async () => {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-secondary-700 mb-1">
+<label className="block text-sm font-medium text-secondary-800 mb-1">
           Description
         </label>
         <textarea
