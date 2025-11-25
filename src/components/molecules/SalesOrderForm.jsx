@@ -78,10 +78,10 @@ const SalesOrderForm = ({ salesOrder, onSubmit, onCancel, isSubmitting }) => {
       ]);
 
       setLookupData({
-        contacts: contactsResponse.data || [],
-        companies: companiesResponse.data || [],
-        deals: dealsResponse.data || [],
-        quotes: quotesResponse.data || []
+contacts: contactsResponse?.data || [],
+        companies: companiesResponse?.data || [],
+        deals: dealsResponse?.data || [],
+        quotes: quotesResponse?.data || []
       });
     } catch (error) {
       console.error('Error loading lookup data:', error);
