@@ -4,7 +4,7 @@ import ApperIcon from '@/components/ApperIcon';
 import Button from '@/components/atoms/Button';
 import Badge from '@/components/atoms/Badge';
 import Modal from '@/components/atoms/Modal';
-import Card from '@/components/atoms/Card';
+import { Card } from '@/components/atoms/Card';
 import SearchBar from '@/components/molecules/SearchBar';
 import SalesOrderForm from '@/components/molecules/SalesOrderForm';
 import Loading from '@/components/ui/Loading';
