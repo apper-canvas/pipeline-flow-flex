@@ -192,7 +192,7 @@ const PipelineBoard = ({ deals, contacts, onMoveCard, onEditDeal, onDeleteDeal, 
                                 </span>
                               </div>
 
-                              {/* Deal Value */}
+{/* Deal Value */}
                               <div className="flex items-center justify-between">
                                 <div className="flex items-center space-x-2">
                                   <ApperIcon name="DollarSign" size={14} className="text-accent-600" />
@@ -202,6 +202,33 @@ const PipelineBoard = ({ deals, contacts, onMoveCard, onEditDeal, onDeleteDeal, 
                                 </div>
                               </div>
 
+                              {/* Status and Priority */}
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center space-x-2">
+                                  <Badge 
+                                    variant={
+                                      deal.status === 'Open' ? 'default' :
+                                      deal.status === 'Closed' ? 'secondary' :
+                                      deal.status === 'InProgress' ? 'accent' :
+                                      deal.status === 'OnHold' ? 'warning' :
+                                      'default'
+                                    }
+                                    className="text-xs"
+                                  >
+                                    {deal.status || 'Open'}
+                                  </Badge>
+                                </div>
+                                <Badge 
+                                  variant={
+                                    deal.priority === 'High' ? 'error' :
+                                    deal.priority === 'Medium' ? 'warning' :
+                                    'secondary'
+                                  }
+                                  className="text-xs"
+                                >
+                                  {deal.priority || 'Medium'}
+                                </Badge>
+                              </div>
                               {/* Days in Stage */}
                               <div className="flex items-center justify-between text-xs">
                                 <div className="flex items-center space-x-1">

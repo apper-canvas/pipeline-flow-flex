@@ -174,9 +174,24 @@ const DealDetails = ({ deal, onEdit, onClose }) => {
                 <label className="text-sm font-medium text-secondary-700">Source</label>
                 <p className="text-secondary-900">{deal.source}</p>
               </div>
-            )}
+)}
             
-<div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="text-sm font-medium text-secondary-700">Status</label>
+                <p className="text-secondary-600 text-sm">
+                  {deal.status || 'Open'}
+                </p>
+              </div>
+              <div>
+                <label className="text-sm font-medium text-secondary-700">Priority</label>
+                <p className="text-secondary-600 text-sm">
+                  {deal.priority || 'Medium'}
+                </p>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="text-sm font-medium text-secondary-700">Created</label>
                 <p className="text-secondary-600 text-sm">

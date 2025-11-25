@@ -13,6 +13,8 @@ fields: [
           {"field": {"Name": "title_c"}},
           {"field": {"Name": "value_c"}},
           {"field": {"Name": "stage_c"}},
+          {"field": {"Name": "status_c"}},
+          {"field": {"Name": "priority_c"}},
           {"field": {"Name": "expectedCloseDate_c"}},
           {"field": {"Name": "contactId_c"}, "referenceField": {"field": {"Name": "Name"}}},
           {"field": {"Name": "Tags"}},
@@ -37,11 +39,13 @@ fields: [
       }
       
       // Map database fields to UI expected format
-      return response.data.map(deal => ({
+return response.data.map(deal => ({
         ...deal,
         title: deal.title_c || deal.Name || '',
         value: parseFloat(deal.value_c) || 0,
         stage: deal.stage_c || 'lead',
+        status: deal.status_c || 'Open',
+        priority: deal.priority_c || 'Medium',
         expectedCloseDate: deal.expectedCloseDate_c || '',
         contactId: deal.contactId_c?.Id || deal.contactId_c || null,
         createdAt: deal.CreatedOn,
@@ -65,6 +69,8 @@ fields: [
           {"field": {"Name": "title_c"}},
           {"field": {"Name": "value_c"}},
           {"field": {"Name": "stage_c"}},
+          {"field": {"Name": "status_c"}},
+          {"field": {"Name": "priority_c"}},
           {"field": {"Name": "expectedCloseDate_c"}},
           {"field": {"Name": "contactId_c"}, "referenceField": {"field": {"Name": "Name"}}},
           {"field": {"Name": "Tags"}},
@@ -84,10 +90,12 @@ fields: [
       // Map database fields to UI expected format
       const deal = response.data;
       return {
-        ...deal,
+...deal,
         title: deal.title_c || deal.Name || '',
         value: parseFloat(deal.value_c) || 0,
         stage: deal.stage_c || 'lead',
+        status: deal.status_c || 'Open',
+        priority: deal.priority_c || 'Medium',
         expectedCloseDate: deal.expectedCloseDate_c || '',
         contactId: deal.contactId_c?.Id || deal.contactId_c || null,
         createdAt: deal.CreatedOn,
@@ -110,6 +118,8 @@ fields: [
           {"field": {"Name": "title_c"}},
           {"field": {"Name": "value_c"}},
           {"field": {"Name": "stage_c"}},
+          {"field": {"Name": "status_c"}},
+          {"field": {"Name": "priority_c"}},
           {"field": {"Name": "expectedCloseDate_c"}},
           {"field": {"Name": "contactId_c"}},
           {"field": {"Name": "Tags"}},
@@ -137,11 +147,13 @@ fields: [
       }
       
       // Map database fields to UI expected format
-      return response.data.map(deal => ({
+return response.data.map(deal => ({
         ...deal,
         title: deal.title_c || deal.Name || '',
         value: parseFloat(deal.value_c) || 0,
         stage: deal.stage_c || 'lead',
+        status: deal.status_c || 'Open',
+        priority: deal.priority_c || 'Medium',
         expectedCloseDate: deal.expectedCloseDate_c || '',
         contactId: deal.contactId_c?.Id || deal.contactId_c || parseInt(contactId),
         createdAt: deal.CreatedOn,
@@ -158,13 +170,15 @@ fields: [
       const apperClient = getApperClient();
       const tableName = 'deals_c';
       
-      const params = {
+const params = {
         records: [
           {
             Name: dealData.title || '',
             title_c: dealData.title || '',
             value_c: parseFloat(dealData.value) || 0,
             stage_c: dealData.stage || 'lead',
+            status_c: dealData.status || 'Open',
+            priority_c: dealData.priority || 'Medium',
             expectedCloseDate_c: dealData.expectedCloseDate || '',
             contactId_c: parseInt(dealData.contactId) || null
           }
@@ -194,10 +208,12 @@ fields: [
         if (successful.length > 0) {
           const createdDeal = successful[0].data;
           return {
-            ...createdDeal,
+...createdDeal,
             title: createdDeal.title_c || createdDeal.Name || '',
             value: parseFloat(createdDeal.value_c) || 0,
             stage: createdDeal.stage_c || 'lead',
+            status: createdDeal.status_c || 'Open',
+            priority: createdDeal.priority_c || 'Medium',
             expectedCloseDate: createdDeal.expectedCloseDate_c || '',
             contactId: createdDeal.contactId_c?.Id || createdDeal.contactId_c || null,
             createdAt: createdDeal.CreatedOn,
@@ -221,7 +237,7 @@ fields: [
         Id: parseInt(id)
       };
       
-      // Only include fields that have values
+// Only include fields that have values
       if (dealData.title !== undefined) {
         updateData.Name = dealData.title;
         updateData.title_c = dealData.title;
@@ -231,6 +247,12 @@ fields: [
       }
       if (dealData.stage !== undefined) {
         updateData.stage_c = dealData.stage;
+      }
+      if (dealData.status !== undefined) {
+        updateData.status_c = dealData.status;
+      }
+      if (dealData.priority !== undefined) {
+        updateData.priority_c = dealData.priority;
       }
       if (dealData.expectedCloseDate !== undefined) {
         updateData.expectedCloseDate_c = dealData.expectedCloseDate;
@@ -267,9 +289,11 @@ fields: [
           const updatedDeal = successful[0].data;
           return {
             ...updatedDeal,
-            title: updatedDeal.title_c || updatedDeal.Name || '',
+title: updatedDeal.title_c || updatedDeal.Name || '',
             value: parseFloat(updatedDeal.value_c) || 0,
             stage: updatedDeal.stage_c || 'lead',
+            status: updatedDeal.status_c || 'Open',
+            priority: updatedDeal.priority_c || 'Medium',
             expectedCloseDate: updatedDeal.expectedCloseDate_c || '',
             contactId: updatedDeal.contactId_c?.Id || updatedDeal.contactId_c || null,
             createdAt: updatedDeal.CreatedOn,
