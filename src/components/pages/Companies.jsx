@@ -62,12 +62,12 @@ const navigate = useNavigate();
   }, [sortField, sortDirection]);
 
   // Filter companies based on search and industry filter
-  useEffect(() => {
+useEffect(() => {
     let filtered = [...companies];
 
     // Apply search filter
-    if (searchTerm.trim()) {
-      const search = searchTerm.toLowerCase();
+    if (searchTerm && String(searchTerm).trim()) {
+      const search = String(searchTerm).toLowerCase();
       filtered = filtered.filter(company => 
         company.Name?.toLowerCase().includes(search) ||
         company.industry_c?.toLowerCase().includes(search) ||
