@@ -79,11 +79,10 @@ const loadData = async () => {
         contactsService.getAll(),
         dealsService.getAll()
       ]);
-      
-      // Ensure we always set arrays, even if services return unexpected data
-      setCompanies(Array.isArray(companiesData) ? companiesData : []);
-      setContacts(Array.isArray(contactsData) ? contactsData : []);
-      setDeals(Array.isArray(dealsData) ? dealsData : []);
+// Ensure we always set arrays, even if services return unexpected data
+      setCompanies(Array.isArray(companiesData?.data) ? companiesData.data : []);
+      setContacts(Array.isArray(contactsData?.data) ? contactsData.data : []);
+      setDeals(Array.isArray(dealsData?.data) ? dealsData.data : []);
     } catch (error) {
       console.error('Error loading data:', error);
       toast.error('Failed to load form data');
